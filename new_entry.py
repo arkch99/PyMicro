@@ -15,12 +15,14 @@ def populate(container):
     s3e=Entry(container).grid(row=3,column=1)
     s4=Label(container,text="Date of Birth: ",font=sub).grid(row=4,sticky=W,pady=4)
     s4e=Entry(container).grid(row=4,column=1)
+    v1 = StringVar()    #String Variable for Gender  
+    v2 = StringVar()    #String Variable for Eating Preferences
     s5=Label(container,text="Gender: ",font=sub).grid(row=5,sticky=W,pady=4)
-    s5e1=Radiobutton(container, text = "Male", font=sub, value = "Male").grid(row=5,column=1)
-    s5e2=Radiobutton(container, text = "Female", font=sub,value = "Female").grid(row=5,column=2)
+    s5e1=Radiobutton(container, text = "Male", font=sub, variable = v1,value = "Male").grid(row=5,column=1)   
+    s5e2=Radiobutton(container, text = "Female", font=sub, variable = v1,value = "Female").grid(row=5,column=2)
     s6=Label(container,text="Eating Preferences: ",font=sub).grid(row=6,sticky=W,pady=4)
-    s6e1=Radiobutton(container, text = "Veg", font=sub,value = "Veg").grid(row=6,column=1)
-    s6e2=Radiobutton(container, text = "Non-Veg", font=sub,value = "Non-Veg").grid(row=6,column=2)
+    s6e1=Radiobutton(container, text = "Veg", font=sub,variable = v2,value = "Veg").grid(row=6,column=1)
+    s6e2=Radiobutton(container, text = "Non-Veg", font=sub,variable = v2,value = "Non-Veg").grid(row=6,column=2)
     s7=Label(container,text="Hobbies: ",font=sub).grid(row=7,sticky=W,pady=4)
     s7e=Entry(container).grid(row=7,column=1)
     s8=Label(container,text="12th physics marks: ",font=sub).grid(row=8,sticky=W,pady=4)
