@@ -2,6 +2,16 @@ from tkinter import*
 import tkinter.font as font
 import dataworks
 
+def Sub(attVarList):
+    #d = {dataworks.fields[i]:attVarList[i].get() for i in range(25)}
+    d = dict()
+    for i in range(25):
+        f = dataworks.fields[i]
+        v = attVarList[i].get()
+        print(v)
+        d[f] = v
+    #print(d)
+
 def populate(container):
     h1 = font.Font(family='Courier', size=30, weight='bold')
     sub = font.Font(family='Courier', size=20)
@@ -99,8 +109,12 @@ def populate(container):
     enGMail=Entry(container, textvariable=l[24]).grid(row=27,column=1)
     #print(dvars)
     #print(len(dataworks.fields))
-    bSubmit = Button(container, text="Submit", command=lambda d = {dataworks.fields[i]:l[i].get() for i in range(25)}:dataworks.newRecord(d))
+    #bSubmit = Button(container, text="Submit", command=lambda d = {dataworks.fields[i]:l[i].get() for i in range(25)}:dataworks.newRecord(d))
+    d = {dataworks.fields[i]:l[i].get() for i in range(25)}
+    #print(l)
+    bSubmit = Button(container, text="Submit", command=lambda:Sub(l))
     bSubmit.grid(row = 28, column=3)
+
 
 def onFrameConfigure(canvas):
     canvas.configure(scrollregion=canvas.bbox("all"))
