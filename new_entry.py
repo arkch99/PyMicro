@@ -1,6 +1,30 @@
 from tkinter import*
 import tkinter.font as font
 import dataworks
+# = list()
+root = Tk()
+
+
+def entry():
+    #global l
+    #root = Tk()
+    root.geometry("{0}x{1}+0+0".format(root.winfo_screenwidth(), root.winfo_screenheight()))
+    #l = [StringVar() for i in range(len(dataworks.fields))]
+    canvas =Canvas(root)
+    frame = Frame(canvas)
+    vsb = Scrollbar(root, orient="vertical", command=canvas.yview)
+    canvas.configure(yscrollcommand=vsb.set)
+
+    vsb.pack(side="right", fill="y")
+    canvas.pack(side="left", fill="both", expand=True)
+    canvas.create_window((4,4), window=frame, anchor="nw")
+
+    frame.bind("<Configure>", lambda event, canvas=canvas: onFrameConfigure(canvas))
+
+    populate(frame)
+    root.mainloop()
+
+ 
 
 def Sub(attVarList):
     #d = {dataworks.fields[i]:attVarList[i].get() for i in range(25)}
@@ -8,11 +32,13 @@ def Sub(attVarList):
     for i in range(25):
         f = dataworks.fields[i]
         v = attVarList[i].get()
-        print(v)
+        #print(v)
         d[f] = v
     #print(d)
+    dataworks.newRecord(d)
 
 def populate(container):
+    #global l
     h1 = font.Font(family='Courier', size=30, weight='bold')
     sub = font.Font(family='Courier', size=20)
 
@@ -23,7 +49,8 @@ def populate(container):
     heading=Label(container,text="Student details:-",font=h1).grid(row=0,pady=8,padx=100)
     
     lbFName=Label(container,text="First name: ",font=sub).grid(row=1,sticky=W,pady=4)
-    enFName=Entry(container, textvariable=l[0]).grid(row=1,column=1)
+    enFName=Entry(container, textvariable=l[0])
+    enFName.grid(row=1,column=1)
 
     lbMName=Label(container,text="Middle name: ",font=sub).grid(row=2,sticky=W,pady=4)
     enMName=Entry(container, textvariable=l[1]).grid(row=2,column=1)
@@ -110,32 +137,16 @@ def populate(container):
     #print(dvars)
     #print(len(dataworks.fields))
     #bSubmit = Button(container, text="Submit", command=lambda d = {dataworks.fields[i]:l[i].get() for i in range(25)}:dataworks.newRecord(d))
-    d = {dataworks.fields[i]:l[i].get() for i in range(25)}
+    #d = {dataworks.fields[i]:(l[i]).get() for i in range(25)}
     #print(l)
-    bSubmit = Button(container, text="Submit", command=lambda:Sub(l))
-    bSubmit.grid(row = 28, column=3)
+    bSubmit = Button(container, text="Submit", command=lambda:Sub(l)).grid(row = 28, column=3)
+    #bSubmit.pack()
 
 
 def onFrameConfigure(canvas):
     canvas.configure(scrollregion=canvas.bbox("all"))
 
-def entry():
-    root = Tk()
-    root.geometry("{0}x{1}+0+0".format(root.winfo_screenwidth(), root.winfo_screenheight()))
-    canvas =Canvas(root)
-    frame = Frame(canvas)
-    vsb = Scrollbar(root, orient="vertical", command=canvas.yview)
-    canvas.configure(yscrollcommand=vsb.set)
 
-    vsb.pack(side="right", fill="y")
-    canvas.pack(side="left", fill="both", expand=True)
-    canvas.create_window((4,4), window=frame, anchor="nw")
-
-    frame.bind("<Configure>", lambda event, canvas=canvas: onFrameConfigure(canvas))
-
-    populate(frame)
-
-    root.mainloop()
 
 if __name__=="__main__":
-    entry()
+   entry()
