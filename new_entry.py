@@ -67,8 +67,13 @@ def populate(container):
     lbPol=Label(container,text="Police Station: ",font=sub).grid(row=18,sticky=W,pady=4)
     enPol=Entry(container).grid(row=18,column=1)
 
-    lbState=Label(container,text="State: ",font=sub).grid(row=19,sticky=W,pady=4)
-    enState=Entry(container).grid(row=19,column=1)
+    var=StringVar(root)
+    lis=["Andra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh","Goa","Gujarat","Haryana","Himachal Pradesh","Jammu and Kashmir","Jharkhand","Karnataka","Kerala","Madya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Orissa","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telagana","Tripura","Uttaranchal","Uttar Pradesh","West Bengal"]
+    lis.sort()
+
+    popupMenu = OptionMenu(container,var, *lis)
+    Label(container, text="State: ",font=sub).grid(row = 7,sticky=W,pady=4)
+    popupMenu.grid(row = 7,column =1)
 
     lbCountry=Label(container,text="Country: ",font=sub).grid(row=20,sticky=W,pady=4)
     enCountry=Entry(container).grid(row=20,column=1)
