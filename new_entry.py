@@ -108,8 +108,15 @@ def populate(container):
     lbPol=Label(container,text="Police Station: ",font=sub).grid(row=18,sticky=W,pady=4)
     enPol=Entry(container, textvariable=l[16]).grid(row=18,column=1)
 
-    lbState=Label(container,text="State: ",font=sub).grid(row=19,sticky=W,pady=4)
-    enState=Entry(container, textvariable=l[17]).grid(row=19,column=1)
+    #lbState=Label(container,text="State: ",font=sub).grid(row=19,sticky=W,pady=4)
+    #enState=Entry(container, textvariable=l[17]).grid(row=19,column=1)
+    #var=StringVar(root)
+    lis=["Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh","Goa","Gujarat","Haryana","Himachal Pradesh","Jammu and Kashmir","Jharkhand","Karnataka","Kerala","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Orissa","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telagana","Tripura","Uttaranchal","Uttar Pradesh","West Bengal"]
+    lis.sort()
+
+    popupMenu = OptionMenu(container, l[17], *lis)
+    Label(container, text="State: ",font=sub).grid(row = 19,sticky=W,pady=4)
+    popupMenu.grid(row = 19,column =1)
 
     lbCountry=Label(container,text="Country: ",font=sub).grid(row=20,sticky=W,pady=4)
     enCountry=Entry(container, textvariable=l[18]).grid(row=20,column=1)
@@ -145,8 +152,6 @@ def populate(container):
 
 def onFrameConfigure(canvas):
     canvas.configure(scrollregion=canvas.bbox("all"))
-
-
 
 if __name__=="__main__":
    entry()
