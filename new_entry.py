@@ -5,6 +5,16 @@ import dataworks
 root = Tk()
 
 
+def show_st(event, root, country, state):
+    if country.get() == "India":
+        enState = OptionMenu(root, state, *dataworks.states)
+        enState.grid(row=20, column=1)
+    else:
+        enState = Entry(root, textvariable=state)
+        enState.grid(row=20, column=1)
+    
+
+
 def entry():
     #global l
     #root = Tk()
@@ -29,7 +39,7 @@ def entry():
 def Sub(attVarList):
     #d = {dataworks.fields[i]:attVarList[i].get() for i in range(25)}
     d = dict()
-    for i in range(25):
+    for i in range(len(dataworks.fields)):
         f = dataworks.fields[i]
         v = attVarList[i].get()
         #print(v)
@@ -108,11 +118,13 @@ def populate(container):
     lbPol=Label(container,text="Police Station: ",font=sub).grid(row=18,sticky=W,pady=4)
     enPol=Entry(container, textvariable=l[16]).grid(row=18,column=1)
 
-    lbState=Label(container,text="State: ",font=sub).grid(row=19,sticky=W,pady=4)
-    enState=Entry(container, textvariable=l[17]).grid(row=19,column=1)
-
-    lbCountry=Label(container,text="Country: ",font=sub).grid(row=20,sticky=W,pady=4)
-    enCountry=Entry(container, textvariable=l[18]).grid(row=20,column=1)
+    lbCountry=Label(container,text="Country: ",font=sub).grid(row=19,sticky=W,pady=4)
+    enCountry=Entry(container, textvariable=l[17])
+    enCountry.bind("<KeyRelease-Return>", lambda event, root=container, country=l[17], state=l[18]: show_st(event, root, country, state))
+    enCountry.grid(row=19,column=1)
+    
+    lbState=Label(container,text="State: ",font=sub).grid(row=20,sticky=W,pady=4)
+    ##enState=Entry(container, textvariable=l[18]).grid(row=20,column=1)
 
     lbPin=Label(container,text="PINCODE: ",font=sub).grid(row=21,sticky=W,pady=4)
     enPin=Entry(container, textvariable=l[19]).grid(row=21,column=1)
@@ -139,7 +151,7 @@ def populate(container):
     #bSubmit = Button(container, text="Submit", command=lambda d = {dataworks.fields[i]:l[i].get() for i in range(25)}:dataworks.newRecord(d))
     #d = {dataworks.fields[i]:(l[i]).get() for i in range(25)}
     #print(l)
-    bSubmit = Button(container, text="Submit", command=lambda:Sub(l)).grid(row = 28, column=3)
+    bSubmit = Button(container, text="Submit", command=lambda:Sub(l), width=20).grid(row = 28, column=3)
     #bSubmit.pack()
 
 
