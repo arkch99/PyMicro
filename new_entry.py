@@ -3,7 +3,7 @@ import tkinter.font as font
 import dataworks
 # = list()
 root = Tk()
-
+root.title("Admission form")
 
 def entry():
     #global l
@@ -34,7 +34,7 @@ def Sub(attVarList):
         v = attVarList[i].get()
         #print(v)
         d[f] = v
-    #print(d)
+    print(d)
     dataworks.newRecord(d)
 
 def populate(container):
@@ -146,7 +146,9 @@ def populate(container):
     #bSubmit = Button(container, text="Submit", command=lambda d = {dataworks.fields[i]:l[i].get() for i in range(25)}:dataworks.newRecord(d))
     #d = {dataworks.fields[i]:(l[i]).get() for i in range(25)}
     #print(l)
-    bSubmit = Button(container, text="Submit", command=lambda:Sub(l)).grid(row = 28, column=3)
+    bSubmit = Button(container, text="Submit", font="Courier 26", command=lambda:Sub(l))
+    bSubmit.config(width=20)
+    bSubmit.grid(row = 28, column=3, sticky=NSEW)
     #bSubmit.pack()
 
 
