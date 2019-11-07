@@ -1,13 +1,13 @@
 from tkinter import*
 import tkinter.font as font
-import dataworks
+import dataworks as dw
 # = list()
 root = Tk()
 root.title("Admission form")
 
 def show_st(event, root, country, state):
     if country.get() == "India":
-        enState = OptionMenu(root, state, *dataworks.states)
+        enState = OptionMenu(root, state, *dw.states)
         enState.grid(row=20, column=1)
     else:
         enState = Entry(root, textvariable=state)
@@ -19,7 +19,7 @@ def entry():
     #global l
     #root = Tk()
     root.geometry("{0}x{1}+0+0".format(root.winfo_screenwidth(), root.winfo_screenheight()))
-    #l = [StringVar() for i in range(len(dataworks.fields))]
+    #l = [StringVar() for i in range(len(dw.fields))]
     canvas =Canvas(root)
     frame = Frame(canvas)
     vsb = Scrollbar(root, orient="vertical", command=canvas.yview)
@@ -34,29 +34,29 @@ def entry():
     populate(frame)
     root.mainloop()
 
- 
-
-def Sub(attVarList):
-    
+def Sub(attVarList):    
     d = dict()
-
     c = 0
-    for i in range(len(dataworks.fields)):
+    for i in range(len(dw.fields)):
         if i == 10 or i == 11: #10 and 11 are Total and Average, so skip them
             continue
-        f = dataworks.fields[i]        
+        f = dw.fields[i]        
         v = attVarList[i].get()
         d[f] = v
         c += 1
     print(d)
-    dataworks.newRecord(d)
+    print("Validation failed for:") #testing
+    print(dw.validate(d))
+    if not len(dw.validate(d)): #invalids has 0 items if all fields are valid
+        dw.newRecord(d)
+    #else: display message box with items from invalid
 
 def populate(container):
     
     h1 = font.Font(family='Courier', size=30, weight='bold')
     sub = font.Font(family='Courier', size=20)
     
-    l = [StringVar() for i in range(len(dataworks.fields))]
+    l = [StringVar() for i in range(len(dw.fields))]
     #Student's details:
     heading=Label(container,text="Student details:-",font=h1).grid(row=0,pady=8,padx=100)
     
