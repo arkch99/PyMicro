@@ -5,6 +5,16 @@ import dataworks
 root = Tk()
 root.title("Admission form")
 
+def show_st(event, root, country, state):
+    if country.get() == "India":
+        enState = OptionMenu(root, state, *dataworks.states)
+        enState.grid(row=20, column=1)
+    else:
+        enState = Entry(root, textvariable=state)
+        enState.grid(row=20, column=1)
+    
+
+
 def entry():
     #global l
     #root = Tk()
@@ -29,11 +39,12 @@ def entry():
 def Sub(attVarList):
     
     d = dict()
+
     c = 0
-    for i in range(25):
+    for i in range(len(dataworks.fields)):
         if i == 10 or i == 11: #10 and 11 are Total and Average, so skip them
-            c = i + 2
-        f = dataworks.fields[c]        
+            continue
+        f = dataworks.fields[i]        
         v = attVarList[i].get()
         d[f] = v
         c += 1
@@ -86,64 +97,61 @@ def populate(container):
     lbCon=Label(container,text="Contact details:-",font=h1).grid(row=11,pady=8,padx=100)
 
     lbPhone=Label(container,text="Phone no: ",font=sub).grid(row=12,sticky=W,pady=4)
-    enPhone=Entry(container, textvariable=l[10]).grid(row=12,column=1)
+    enPhone=Entry(container, textvariable=l[12]).grid(row=12,column=1)
 
     lbMail=Label(container,text="Email address: ",font=sub).grid(row=13,sticky=W,pady=4)
-    enMail=Entry(container, textvariable=l[11]).grid(row=13,column=1)
+    enMail=Entry(container, textvariable=l[13]).grid(row=13,column=1)
 
     lbLocal=Label(container,text="Locality: ",font=sub).grid(row=14,sticky=W,pady=4)
-    enLocal=Entry(container, textvariable=l[12]).grid(row=14,column=1)
+    enLocal=Entry(container, textvariable=l[14]).grid(row=14,column=1)
 
     lbDis=Label(container,text="District: ",font=sub).grid(row=15,sticky=W,pady=4)
-    enDis=Entry(container, textvariable=l[13]).grid(row=15,column=1)
+    enDis=Entry(container, textvariable=l[15]).grid(row=15,column=1)
 
     lbCity=Label(container,text="City: ",font=sub).grid(row=16,sticky=W,pady=4)
-    enCity=Entry(container, textvariable=l[14]).grid(row=16,column=1)
+    enCity=Entry(container, textvariable=l[16]).grid(row=16,column=1)
 
     lbPO=Label(container,text="Post Office: ",font=sub).grid(row=17,sticky=W,pady=4)
-    enPO=Entry(container, textvariable=l[15]).grid(row=17,column=1)
+    enPO=Entry(container, textvariable=l[17]).grid(row=17,column=1)
 
     lbPol=Label(container,text="Police Station: ",font=sub).grid(row=18,sticky=W,pady=4)
-    enPol=Entry(container, textvariable=l[16]).grid(row=18,column=1)
+    enPol=Entry(container, textvariable=l[18]).grid(row=18,column=1)
 
-    #lbState=Label(container,text="State: ",font=sub).grid(row=19,sticky=W,pady=4)
-    #enState=Entry(container, textvariable=l[17]).grid(row=19,column=1)
-    #var=StringVar(root)
-    lis=["Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh","Goa","Gujarat","Haryana","Himachal Pradesh","Jammu and Kashmir","Jharkhand","Karnataka","Kerala","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Orissa","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telagana","Tripura","Uttaranchal","Uttar Pradesh","West Bengal"]
-    lis.sort()
+    lbCountry=Label(container,text="Country: ",font=sub).grid(row=19,sticky=W,pady=4)
+    enCountry=Entry(container, textvariable=l[20])
+    enCountry.bind("<KeyRelease-Return>", lambda event, root=container, country=l[20], state=l[19]: show_st(event, root, country, state))
+    enCountry.grid(row=19,column=1)
+    
+    lbState=Label(container,text="State: ",font=sub).grid(row=20,sticky=W,pady=4)
+    ##enState=Entry(container, textvariable=l[18]).grid(row=20,column=1)
 
-    popupMenu = OptionMenu(container, l[17], *lis)
-    Label(container, text="State: ",font=sub).grid(row = 19,sticky=W,pady=4)
-    popupMenu.grid(row = 19,column =1)
-
-    lbCountry=Label(container,text="Country: ",font=sub).grid(row=20,sticky=W,pady=4)
-    enCountry=Entry(container, textvariable=l[18]).grid(row=20,column=1)
 
     lbPin=Label(container,text="PINCODE: ",font=sub).grid(row=21,sticky=W,pady=4)
-    enPin=Entry(container, textvariable=l[19]).grid(row=21,column=1)
+    enPin=Entry(container, textvariable=l[21]).grid(row=21,column=1)
     
     #Guardians details
     lbGuard=Label(container,text="Guardian details:-",font=h1).grid(row=22,pady=8,padx=100)
 
     lbGName=Label(container,text="Guardian's name: ",font=sub).grid(row=23,sticky=W,pady=4)
-    enGName=Entry(container, textvariable=l[20]).grid(row=23,column=1)
+    enGName=Entry(container, textvariable=l[22]).grid(row=23,column=1)
 
     lbGRel=Label(container,text="Relation: ",font=sub).grid(row=24,sticky=W,pady=4)
-    enGRel=Entry(container, textvariable=l[21]).grid(row=24,column=1)
+    enGRel=Entry(container, textvariable=l[23]).grid(row=24,column=1)
 
     lbGOcc=Label(container,text="Occupation: ",font=sub).grid(row=25,sticky=W,pady=4)
-    enGOcc=Entry(container, textvariable=l[22]).grid(row=25,column=1)
+    enGOcc=Entry(container, textvariable=l[24]).grid(row=25,column=1)
 
     lbGPhone=Label(container,text="Phone: ",font=sub).grid(row=26,sticky=W,pady=4)
-    enGPhone=Entry(container, textvariable=l[23]).grid(row=26,column=1)
+    enGPhone=Entry(container, textvariable=l[25]).grid(row=26,column=1)
 
     lbGMail=Label(container,text="Email: ",font=sub).grid(row=27,sticky=W,pady=4)
-    enGMail=Entry(container, textvariable=l[24]).grid(row=27,column=1)
+    enGMail=Entry(container, textvariable=l[26]).grid(row=27,column=1)
+
     
     bSubmit = Button(container, text="Submit", font="Courier 26", command=lambda:Sub(l))
     bSubmit.config(width=20)
     bSubmit.grid(row=28, column=1, sticky=W)
-    
+ 
 
 def onFrameConfigure(canvas):
     canvas.configure(scrollregion=canvas.bbox("all"))
