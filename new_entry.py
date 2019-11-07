@@ -3,7 +3,7 @@ import tkinter.font as font
 import dataworks
 # = list()
 root = Tk()
-
+root.title("Admission form")
 
 def show_st(event, root, country, state):
     if country.get() == "India":
@@ -37,23 +37,25 @@ def entry():
  
 
 def Sub(attVarList):
-    #d = {dataworks.fields[i]:attVarList[i].get() for i in range(25)}
+    
     d = dict()
-    for i in range(len(dataworks.fields)):
-        f = dataworks.fields[i]
+
+    c = 0
+    for i in range(25):
+        if i == 10 or i == 11: #10 and 11 are Total and Average, so skip them
+            c = i + 2
+        f = dataworks.fields[c]        
         v = attVarList[i].get()
-        #print(v)
         d[f] = v
-    #print(d)
+        c += 1
+    print(d)
     dataworks.newRecord(d)
 
 def populate(container):
-    #global l
+    
     h1 = font.Font(family='Courier', size=30, weight='bold')
     sub = font.Font(family='Courier', size=20)
-
-    dvars = dict()
-    dvars = dvars.fromkeys(dataworks.fields, "")
+    
     l = [StringVar() for i in range(len(dataworks.fields))]
     #Student's details:
     heading=Label(container,text="Student details:-",font=h1).grid(row=0,pady=8,padx=100)
@@ -70,10 +72,7 @@ def populate(container):
     
     lbDOB=Label(container,text="Date of Birth: ",font=sub).grid(row=4,sticky=W,pady=4)
     enDOB=Entry(container, textvariable=l[3]).grid(row=4,column=1)
-    
-    #v1 = StringVar()    #String Variable for Gender  
-    #v2 = StringVar()    #String Variable for Eating Preferences
-    
+        
     lbGen=Label(container,text="Gender: ",font=sub).grid(row=5,sticky=W,pady=4)    
     rbMGen=Radiobutton(container, text = "Male", font=sub, variable = l[4],value = "Male").grid(row=5,column=1)   
     rbFGen=Radiobutton(container, text = "Female", font=sub, variable = l[4],value = "Female").grid(row=5,column=2)
@@ -126,6 +125,7 @@ def populate(container):
     lbState=Label(container,text="State: ",font=sub).grid(row=20,sticky=W,pady=4)
     ##enState=Entry(container, textvariable=l[18]).grid(row=20,column=1)
 
+
     lbPin=Label(container,text="PINCODE: ",font=sub).grid(row=21,sticky=W,pady=4)
     enPin=Entry(container, textvariable=l[19]).grid(row=21,column=1)
     
@@ -146,19 +146,15 @@ def populate(container):
 
     lbGMail=Label(container,text="Email: ",font=sub).grid(row=27,sticky=W,pady=4)
     enGMail=Entry(container, textvariable=l[24]).grid(row=27,column=1)
-    #print(dvars)
-    #print(len(dataworks.fields))
-    #bSubmit = Button(container, text="Submit", command=lambda d = {dataworks.fields[i]:l[i].get() for i in range(25)}:dataworks.newRecord(d))
-    #d = {dataworks.fields[i]:(l[i]).get() for i in range(25)}
-    #print(l)
-    bSubmit = Button(container, text="Submit", command=lambda:Sub(l), width=20).grid(row = 28, column=3)
-    #bSubmit.pack()
 
+    
+    bSubmit = Button(container, text="Submit", font="Courier 26", command=lambda:Sub(l))
+    bSubmit.config(width=20)
+    bSubmit.grid(row=28, column=1, sticky=W)
+ 
 
 def onFrameConfigure(canvas):
     canvas.configure(scrollregion=canvas.bbox("all"))
-
-
 
 if __name__=="__main__":
    entry()
