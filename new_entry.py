@@ -1,6 +1,6 @@
 from tkinter import*
 import tkinter.font as font
-from PIL import ImageTk, Image
+#from PIL import ImageTk, Image
 from tkinter.messagebox import showerror
 import dataworks as dw
 
@@ -17,7 +17,7 @@ def show_st(event, root, country, state):
 
 def check_3(a3,l):
     if(a3.get()==1):
-        print("works!!!")
+        #print("works!!!")
         for i in range(35,43):
             l[i]=l[i-21]
 def check_2(a2,l):
@@ -29,7 +29,7 @@ def check_2(a2,l):
 def entry():
     h = font.Font(family='Courier', size=50, weight='bold')
     root.geometry("{0}x{1}+0+0".format(root.winfo_screenwidth(), root.winfo_screenheight()))
-    img = ImageTk.PhotoImage(Image.open("ABC-Logo.png"))
+    img = PhotoImage(file="ABC-Logo.png")
     Label(root,image=img,text=" ABC School of Engineering",compound=LEFT,font=h,bg="blue",fg="white",height=150).pack(side=TOP,fill=X)
     canvas =Canvas(root)
     frame = Frame(canvas)

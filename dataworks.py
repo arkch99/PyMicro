@@ -2,7 +2,7 @@ import csv
 import os
 import datetime as dt
 
-fields = ("First name", "Middle name", "Last name", "DoB", "Gender", "Eating", "Hobby", "Phy", "Chem", "Maths", "Total", "Average", "Phone", "Mail", "Country",  "State", "City","Locality", "District", "Post Office","Police Station", "PIN", "TCountry",  "TState", "TCity","TLocality", "TDistrict", "TPost Office", "TPolice Station",  "TPIN", "Guardian's Name", "Guardian's Relation", "Guardian's Occupation", "Guardian's Phone", "Guardian's Mail", "Guardian's Country",  "Guardian's State", "Guardian's City","Guardian's Locality", "Guardian's District", "Guardian's Post Office","Guardian's Police Station" , "Guardian's PIN")
+fields = ("First name", "Middle name", "Last name", "DoB", "Gender", "Eating", "Hobby", "Phy", "Chem", "Maths", "Total", "Percentage", "Phone", "Mail", "Country",  "State", "City","Locality", "District", "Post Office","Police Station", "PIN", "TCountry",  "TState", "TCity","TLocality", "TDistrict", "TPost Office", "TPolice Station",  "TPIN", "Guardian's Name", "Guardian's Relation", "Guardian's Occupation", "Guardian's Phone", "Guardian's Mail", "Guardian's Country",  "Guardian's State", "Guardian's City","Guardian's Locality", "Guardian's District", "Guardian's Post Office","Guardian's Police Station" , "Guardian's PIN")
 
 states = ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jammu & Kashmir', 'Jharkhand', 'Karnatak', 'Kerala', 'Ladakh', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal']
 
@@ -42,7 +42,7 @@ def validate(suspDict):
 def newRecord(varDict): #varList is in the order maintained in new_entry
     #print(varDict)
     varDict["Total"] = float(varDict["Phy"]) + float(varDict["Chem"]) + float(varDict["Maths"])
-    varDict["Average"] = float(varDict["Total"]) / 3
+    varDict["Percentage"] = float(varDict["Total"]) / 3
     firstFlag = False
     if not os.path.exists("records.csv"):
         open("records.csv", "x")
