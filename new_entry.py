@@ -1,5 +1,6 @@
 from tkinter import*
 import tkinter.font as font
+from PIL import ImageTk, Image
 from tkinter.messagebox import showerror
 import dataworks as dw
 
@@ -13,14 +14,23 @@ def show_st(event, root, country, state):
     else:
         enState = Entry(root, textvariable=state)
         enState.grid(row=1,column=3)
+
+def check_3(a3,l):
+    if(a3.get()==1):
+        print("works!!!")
+        for i in range(35,43):
+            l[i]=l[i-21]
+def check_2(a2,l):
+    if(a2.get()==1):
+        for i in range(22,30):
+            l[i]=l[i-8]
  
+
 def entry():
     h = font.Font(family='Courier', size=50, weight='bold')
     root.geometry("{0}x{1}+0+0".format(root.winfo_screenwidth(), root.winfo_screenheight()))
-    f1=Frame(root,bg="blue").pack(side=TOP,fill=X)
-    #photo = PhotoImage(file = "ABC-Logo.jpg")
-    #Label(f1,image=photo).pack(side=TOP)
-    Label(f1,text="ABC School of Engineering",font=h,bg="blue",fg="white",height=2).pack(side=TOP,fill=X)
+    img = ImageTk.PhotoImage(Image.open("ABC-Logo.png"))
+    Label(root,image=img,text=" ABC School of Engineering",compound=LEFT,font=h,bg="blue",fg="white",height=150).pack(side=TOP,fill=X)
     canvas =Canvas(root)
     frame = Frame(canvas)
     vsb = Scrollbar(root, orient="vertical", command=canvas.yview)
@@ -45,7 +55,7 @@ def Sub(attVarList):
         v = attVarList[i].get()
         d[f] = v
         c += 1
-    print(d)
+    #print(d)
     #print("Validation failed for:") #testing
     failed = dw.validate(d)
     if not len(dw.validate(d)): #invalids has 0 items if all fields are valid
@@ -61,6 +71,8 @@ def populate(container):
     sub = font.Font(family='Courier', size=12)
 
     l = [StringVar() for i in range(len(dw.fields))]
+    a2=IntVar()
+    a3=IntVar()
     
     #Student's details:
     student = LabelFrame(container, text="Student details", font=h1)
@@ -168,7 +180,7 @@ def populate(container):
     Label(address_2,text="    PINCODE: ",font=sub).grid(row=3,column=4,sticky=W,pady=4)
     Entry(address_2, textvariable=l[29]).grid(row=3,column=5)
     
-    Checkbutton(address_2, text="Same as address 1",font=sub).grid(row=4,column=1,sticky=W)
+    Checkbutton(address_2, text="Same as address 1",font=sub,variable=a2,command=lambda:check_2(a2,l)).grid(row=4,column=1,sticky=W)
     #for input to checkbox use variable or textvariable
 
     #Guardians details
@@ -216,9 +228,8 @@ def populate(container):
     
     Label(address_3,text="    PINCODE*: ",font=sub).grid(row=3,column=4,sticky=W,pady=4)
     Entry(address_3, textvariable=l[42]).grid(row=3,column=5)
-    Checkbutton(address_3, text="Same as address 1",font=sub).grid(row=4,column=1,sticky=W)
-
-    Button(container, text="Submit", command=lambda:Sub(l), width=20).grid(row = 4, column=3)
+    Checkbutton(address_3, text="Same as address 1",font=sub,variable=a3,command=lambda:check_3(a3,l)).grid(row=4,column=1,sticky=W)
+    Button(container, text="Submit",font=sub, command=lambda:Sub(l), width=20).grid(row = 4, column=3)
 
 def onFrameConfigure(canvas):
     canvas.configure(scrollregion=canvas.bbox("all"))
