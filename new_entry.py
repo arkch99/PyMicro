@@ -51,14 +51,14 @@ def Sub(attVarList):
     if not len(dw.validate(d)): #invalids has 0 items if all fields are valid
         dw.newRecord(d)
     else:
-        strerror = "Validation failed for:\n"
+        strerror = "Please ensure that the following fields contain valid information:\n"
         for fail in failed:
             strerror += fail + "\n"
         showerror("Error", strerror)
  
 def populate(container):
     h1 = font.Font(family='Courier', size=30)
-    sub = font.Font(family='Courier', size=16)
+    sub = font.Font(family='Courier', size=12)
 
     l = [StringVar() for i in range(len(dw.fields))]
     
@@ -75,9 +75,9 @@ def populate(container):
     Label(student,text="    Last name*: ",font=sub).grid(row=1,column=4,sticky=W,pady=4)
     Entry(student, textvariable=l[2]).grid(row=1,column=5)
 
-    Label(student,text="    Date of Birth: ",font=sub).grid(row=2,sticky=W,pady=4)
+    Label(student,text="    Date of Birth(dd-mm-yyyy)*: ",font=sub).grid(row=2,sticky=W,pady=4)
     Entry(student, textvariable=l[3]).grid(row=2,column=1)
-
+    
     Label(student,text="    Gender*: ",font=sub).grid(row=3,sticky=W,pady=4)    
     Radiobutton(student, text = "Male", font=sub, variable = l[4],value = "Male").grid(row=3,column=1)   
     Radiobutton(student, text = "Female", font=sub, variable = l[4],value = "Female").grid(row=3,column=2)
