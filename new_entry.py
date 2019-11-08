@@ -17,9 +17,9 @@ def entry():
     h = font.Font(family='Courier', size=50, weight='bold')
     root.geometry("{0}x{1}+0+0".format(root.winfo_screenwidth(), root.winfo_screenheight()))
     f1=Frame(root,bg="blue").pack(side=TOP,fill=X)
-    photo = PhotoImage(file = "ABC-Logo.jpg")
-    Label(f1,image=photo).pack(side=TOP)
-    Label(f1,text="ABC School of Engineering",font=h,bg="blue",fg="white",height=2).pack(side=LEFT)
+    #photo = PhotoImage(file = "ABC-Logo.jpg")
+    #Label(f1,image=photo).pack(side=TOP)
+    Label(f1,text="ABC School of Engineering",font=h,bg="blue",fg="white",height=2).pack(side=TOP,fill=X)
     canvas =Canvas(root)
     frame = Frame(canvas)
     vsb = Scrollbar(root, orient="vertical", command=canvas.yview)
@@ -45,7 +45,7 @@ def Sub(attVarList):
 
 def populate(container):
     h1 = font.Font(family='Courier', size=30)
-    sub = font.Font(family='Courier', size=22)
+    sub = font.Font(family='Courier', size=16)
 
     dvars = dict()
     dvars = dvars.fromkeys(dataworks.fields, "")
