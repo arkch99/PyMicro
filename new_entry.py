@@ -1,6 +1,5 @@
 from tkinter import*
 import tkinter.font as font
-#from PIL import ImageTk, Image
 from tkinter.messagebox import showerror
 import dataworks as dw
 
@@ -8,7 +7,7 @@ root = Tk()
 root.title("Admission form")
 
 def show_st(event, root, country, state):
-    if country.get() == "India":
+    if(country.get() == "India" or country.get()=="india" or country.get()=="INDIA"):
         enState = OptionMenu(root, state, *dw.states)
         enState.grid(row=1, column=3)
     else:
@@ -17,7 +16,6 @@ def show_st(event, root, country, state):
 
 def check_3(a3,l):
     if(a3.get()==1):
-        #print("works!!!")
         for i in range(35,43):
             l[i]=l[i-21]
 def check_2(a2,l):
@@ -34,9 +32,11 @@ def entry():
     canvas =Canvas(root)
     frame = Frame(canvas)
     vsb = Scrollbar(root, orient="vertical", command=canvas.yview)
-    canvas.configure(yscrollcommand=vsb.set)
+    vcb = Scrollbar(root,orient="horizontal", command=canvas.xview)
+    canvas.configure(yscrollcommand=vsb.set,xscrollcommand=vcb.set)
 
     vsb.pack(side="right", fill="y")
+    vcb.pack(side="bottom", fill="x")
     canvas.pack(side="left", fill="both", expand=True)
     canvas.create_window((4,4), window=frame, anchor="nw")
 
@@ -49,16 +49,14 @@ def Sub(attVarList):
     d = dict()
     c = 0
     for i in range(len(dw.fields)):
-        if i == 10 or i == 11: #10 and 11 are Total and Average, so skip them
+        if i == 10 or i == 11: 
             continue
         f = dw.fields[i]        
         v = attVarList[i].get()
         d[f] = v
         c += 1
-    #print(d)
-    #print("Validation failed for:") #testing
     failed = dw.validate(d)
-    if not len(dw.validate(d)): #invalids has 0 items if all fields are valid
+    if not len(dw.validate(d)): 
         dw.newRecord(d)
     else:
         strerror = "Please ensure that the following fields contain valid information:\n"
@@ -181,8 +179,7 @@ def populate(container):
     Entry(address_2, textvariable=l[29]).grid(row=3,column=5)
     
     Checkbutton(address_2, text="Same as address 1",font=sub,variable=a2,command=lambda:check_2(a2,l)).grid(row=4,column=1,sticky=W)
-    #for input to checkbox use variable or textvariable
-
+    
     #Guardians details
     guardian = LabelFrame(container, text="Guardian details", font=h1)
     guardian.grid(row=2,columnspan=7,sticky=W, padx=5, pady=5, ipadx=5, ipady=5)
